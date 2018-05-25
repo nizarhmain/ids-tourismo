@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/auth")
 public class AccountController {
 
-    private final AccountRepository accountRepository;
+    private final AccountRepository accountRepository; 
 
     @Autowired
     public AccountController(AccountRepository accountRepository) {
