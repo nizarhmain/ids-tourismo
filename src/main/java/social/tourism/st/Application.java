@@ -1,12 +1,14 @@
-package com.example.herokudemo;
+package social.tourism.st;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HerokuDemoApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HerokuDemoApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
+
 }
+
