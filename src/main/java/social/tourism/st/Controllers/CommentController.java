@@ -1,9 +1,7 @@
 package social.tourism.st.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -12,25 +10,22 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import social.tourism.st.Models.Comment;
 import social.tourism.st.Repositories.CommentRepository;
-import social.tourism.st.Repositories.HistoricalSpotRepository;
+import social.tourism.st.Repositories.POI_Repository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-
-import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
 
     private CommentRepository commentRepository;
-    private HistoricalSpotRepository historicalSpotRepository;
+    private POI_Repository POIRepository;
 
     @Autowired
-    public CommentController(CommentRepository commentRepository, HistoricalSpotRepository historicalSpotRepository){
+    public CommentController(CommentRepository commentRepository, POI_Repository POIRepository){
         this.commentRepository = commentRepository;
-        this.historicalSpotRepository = historicalSpotRepository;
+        this.POIRepository = POIRepository;
 
     }
 
@@ -45,7 +40,7 @@ public class CommentController {
     public ResponseEntity<Void> add(@Validated @RequestBody Comment comment){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (historicalSpotRepository.findByName(comment.getMonumentAttachedTo()) == null ) {
+            if (POIRepository.findByName(comment.getMonumentAttachedTo()) == null ) {
             System.out.println("this monument doesn't exist ");
             return new ResponseEntity<>(HttpStatus.CONFLICT);
             } else {

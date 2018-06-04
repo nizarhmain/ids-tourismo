@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
 
-public class HistoricalSpot {
+public class POI {
     @Id
     private String id;
 
@@ -23,9 +23,9 @@ public class HistoricalSpot {
     @NotNull
     private String comune;
 
-    public HistoricalSpot(){}
+    public POI(){}
 
-    public HistoricalSpot(String name, String type, String info, String coordinates, String comune, String image) {
+    public POI(String name, String type, String info, String coordinates, String comune, String image) {
         this.name = name;
         this.type = type;
         this.info = info;

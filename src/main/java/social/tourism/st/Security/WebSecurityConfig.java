@@ -32,21 +32,21 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				// restrict user access here, all users can see all others users
 
-				//Comment CRUD
+				//Commenti CRUD
 				.antMatchers(HttpMethod.GET, "/api/comments/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/comments/**").hasRole("USER")
-				// Comuni CRUD
+				// Ente CRUD
 				.antMatchers(HttpMethod.GET, "/api/comuni").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/comuni").hasRole("ADMIN")
 				.antMatchers(HttpMethod.PUT, "/api/comuni").hasRole("ADMIN")
 				.antMatchers(HttpMethod.DELETE, "/api/comuni").hasRole("ADMIN")
 
-				// Historical CRUD
-				.antMatchers(HttpMethod.GET, "/api/historical/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/historical/nearby").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/historical/**").hasRole("USER")
-				.antMatchers(HttpMethod.PUT, "/api/historical/**").hasRole("USER")
-				.antMatchers(HttpMethod.DELETE, "/api/historical/**").hasRole("USER")
+				// POI CRUD
+				.antMatchers(HttpMethod.GET, "/api/poi/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/poi/nearby").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/poi/**").hasRole("USER")
+				.antMatchers(HttpMethod.PUT, "/api/poi/**").hasRole("USER")
+				.antMatchers(HttpMethod.DELETE, "/api/poi/**").hasRole("USER")
 				.and()
 				.httpBasic().and()
 				.csrf().disable();

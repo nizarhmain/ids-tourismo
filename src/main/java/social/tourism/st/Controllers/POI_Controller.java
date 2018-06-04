@@ -7,44 +7,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import social.tourism.st.Models.GeoBoundaries;
-import social.tourism.st.Models.HistoricalSpot;
-import social.tourism.st.Repositories.HistoricalSpotRepository;
+import social.tourism.st.Models.POI;
+import social.tourism.st.Repositories.POI_Repository;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/historical")
-public class HistoricalSpotController {
+@RequestMapping("/api/poi")
+public class POI_Controller {
 
-    private HistoricalSpotRepository repository;
+    private POI_Repository repository;
 
     @Autowired
-    public HistoricalSpotController(HistoricalSpotRepository repository){
+    public POI_Controller(POI_Repository repository){
         this.repository = repository;
     }
 
     // get all
     @RequestMapping(method = RequestMethod.GET)
-    public List<HistoricalSpot> findAll(){
+    public List<POI> findAll(){
         return repository.findAll();
     }
 
     // add one
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> add(@Validated @RequestBody HistoricalSpot historicalSpot){
+    public ResponseEntity<Void> add(@Validated @RequestBody POI POI){
 
-        if (repository.findByName(historicalSpot.getName()) != null ) {
-            System.out.println("A Monument with the name " + historicalSpot.getName()+ " already exist");
+        if (repository.findByName(POI.getName()) != null ) {
+            System.out.println("A Monument with the name " + POI.getName()+ " already exist");
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
-            HistoricalSpot model = new HistoricalSpot();
-            model.setName(historicalSpot.getName());
-            model.setType(historicalSpot.getType());
-            model.setInfo(historicalSpot.getInfo());
-            model.setCoordinates(historicalSpot.getCoordinates());
-            model.setComune(historicalSpot.getComune());
-            model.setImage(historicalSpot.getImage());
+            POI model = new POI();
+            model.setName(POI.getName());
+            model.setType(POI.getType());
+            model.setInfo(POI.getInfo());
+            model.setCoordinates(POI.getCoordinates());
+            model.setComune(POI.getComune());
+            model.setImage(POI.getImage());
             repository.save(model);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -53,10 +52,10 @@ public class HistoricalSpotController {
     // find all monuments near the users position
     @RequestMapping(value="/nearby" , method = RequestMethod.POST)
     public void nearby(@Validated @RequestBody GeoBoundaries geoBoundaries) {
-        List<HistoricalSpot> hss = repository.findAll();
-        List<HistoricalSpot> hstarget;
+        List<POI> hss = repository.findAll();
+        List<POI> hstarget;
 
-        for ( HistoricalSpot h: hss) {
+        for ( POI h: hss) {
             if      (Double.valueOf(h.latitude()) < Double.valueOf(geoBoundaries.maxLat) &&
                     Double.valueOf(h.latitude()) > Double.valueOf(geoBoundaries.minLat) &&
                     Double.valueOf(h.longitude()) < Double.valueOf(geoBoundaries.maxLon) &&
@@ -70,7 +69,7 @@ public class HistoricalSpotController {
 
     // find all the monuments in one comune
     @RequestMapping(value="/{comune}" ,method = RequestMethod.GET)
-    public List<HistoricalSpot> findByComune(@PathVariable String comune){
+    public List<POI> findByComune(@PathVariable String comune){
         return repository.findByComune(comune.toLowerCase());
     }
 
@@ -82,15 +81,15 @@ public class HistoricalSpotController {
 
     // find monument by name
     @RequestMapping(value="/monument/{name}", method = RequestMethod.GET)
-    public HistoricalSpot findByName(@PathVariable String name){
+    public POI findByName(@PathVariable String name){
         return repository.findByName(name);
     }
 
 
     // update a monument
     @RequestMapping(value = "/monument/{name}", method = RequestMethod.PUT)
-    public HistoricalSpot update(@PathVariable String name, @Validated @RequestBody HistoricalSpot updatedSpot){
-        HistoricalSpot model = repository.findByName(name);
+    public POI update(@PathVariable String name, @Validated @RequestBody POI updatedSpot){
+        POI model = repository.findByName(name);
             if(model != null){
                 model.setName(updatedSpot.getName());
                 model.setInfo(updatedSpot.getInfo());
