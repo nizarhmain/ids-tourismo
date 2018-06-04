@@ -10,6 +10,7 @@ public class POI {
 
     @NotNull
     private String name;
+    
     @NotNull
     private String type;
     @NotNull
