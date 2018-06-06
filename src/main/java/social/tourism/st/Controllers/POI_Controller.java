@@ -42,7 +42,7 @@ public class POI_Controller {
             model.setType(POI.getType());
             model.setInfo(POI.getInfo());
             model.setCoordinates(POI.getCoordinates());
-            model.setComune(POI.getComune());
+            model.setEnte(POI.getEnte());
             model.setImage(POI.getImage());
             repository.save(model);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -67,10 +67,10 @@ public class POI_Controller {
         System.out.println(geoBoundaries.toString());
     }
 
-    // find all the monuments in one comune
-    @RequestMapping(value="/{comune}" ,method = RequestMethod.GET)
-    public List<POI> findByComune(@PathVariable String comune){
-        return repository.findByComune(comune.toLowerCase());
+    // find all the monuments in one ente
+    @RequestMapping(value="/{ente}" ,method = RequestMethod.GET)
+    public List<POI> findByEnte(@PathVariable String ente){
+        return repository.findByEnte(ente);
     }
 
     // find monument by name
@@ -95,7 +95,7 @@ public class POI_Controller {
                 model.setInfo(updatedSpot.getInfo());
                 model.setCoordinates(updatedSpot.getCoordinates());
                 model.setType(updatedSpot.getType());
-                model.setComune(updatedSpot.getComune());
+                model.setEnte(updatedSpot.getEnte());
                 return repository.save(model);
             }
 

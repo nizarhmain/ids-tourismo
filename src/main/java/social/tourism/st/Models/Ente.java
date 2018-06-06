@@ -1,12 +1,20 @@
 package social.tourism.st.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import social.tourism.st.Repositories.AccountRepository;
+
 import javax.validation.constraints.Size;
 
-public class Comune {
+public class Ente {
+
     @Id
     private String id;
+
+    private String password;
 
     @Size(min = 1, max = 30, message = "error.title.size")
     public String nome;
@@ -19,6 +27,12 @@ public class Comune {
 
     @Size(min = 1, max = 30, message = "error.title.size")
     public String superficie;
+
+    @JsonIgnore
+    @JsonProperty(value = "password")
+    public String getPassword() { return this.password ;}
+
+    public void setPassword(String password) { this.password = password; }
 
     public String getNome() {
         return nome;
@@ -52,18 +66,19 @@ public class Comune {
         this.superficie = superficie;
     }
 
-    public Comune(String nome, String regione, String provincia, String superficie) {
+    public Ente(String nome, String regione, String provincia, String superficie, String password) {
         this.nome = nome;
         this.regione = regione;
         this.provincia = provincia;
         this.superficie = superficie;
+        this.password = password;
     }
 
-    public Comune(){};
+    public Ente(){};
 
     @Override
     public String toString() {
-        return "Comune{" +
+        return "Ente{" +
                 "id='" + id + '\'' +
                 ", nome='" + nome + '\'' +
                 ", regione='" + regione + '\'' +

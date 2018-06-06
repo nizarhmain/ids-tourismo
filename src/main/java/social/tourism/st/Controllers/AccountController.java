@@ -54,6 +54,7 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
+    // add an account
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity<Void> createAccount(@Validated @RequestBody Account user) {
 

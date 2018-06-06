@@ -8,6 +8,6 @@ import java.util.List;
 public interface POI_Repository extends MongoRepository<POI, String>{
 
     POI findByName(String name);
-    List<POI> findByComune(String comune);
+    List<POI> findByEnte(String ente);
 
 }

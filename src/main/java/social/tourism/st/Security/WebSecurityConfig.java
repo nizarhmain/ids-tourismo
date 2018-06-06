@@ -36,17 +36,17 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/comments/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/comments/**").hasRole("USER")
 				// Ente CRUD
-				.antMatchers(HttpMethod.GET, "/api/comuni").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/comuni").hasRole("ADMIN")
-				.antMatchers(HttpMethod.PUT, "/api/comuni").hasRole("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/comuni").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET, "/api/ente").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/ente").hasRole("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/api/ente").hasRole("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/ente").hasRole("ADMIN")
 
 				// POI CRUD
 				.antMatchers(HttpMethod.GET, "/api/poi/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/poi/nearby").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/poi/**").hasRole("USER")
-				.antMatchers(HttpMethod.PUT, "/api/poi/**").hasRole("USER")
-				.antMatchers(HttpMethod.DELETE, "/api/poi/**").hasRole("USER")
+				.antMatchers(HttpMethod.POST, "/api/poi/**").hasRole("ENTE")
+				.antMatchers(HttpMethod.PUT, "/api/poi/**").hasRole("ENTE")
+				.antMatchers(HttpMethod.DELETE, "/api/poi/**").hasRole("ENTE")
 				.and()
 				.httpBasic().and()
 				.csrf().disable();

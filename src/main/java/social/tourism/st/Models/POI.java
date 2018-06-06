@@ -10,7 +10,7 @@ public class POI {
 
     @NotNull
     private String name;
-    
+
     @NotNull
     private String type;
     @NotNull
@@ -22,16 +22,16 @@ public class POI {
 
 
     @NotNull
-    private String comune;
+    private String ente;
 
     public POI(){}
 
-    public POI(String name, String type, String info, String coordinates, String comune, String image) {
+    public POI(String name, String type, String info, String coordinates, String ente, String image) {
         this.name = name;
         this.type = type;
         this.info = info;
         this.coordinates = coordinates;
-        this.comune = comune;
+        this.ente = ente;
         this.image = image;
     }
 
@@ -86,11 +86,11 @@ public class POI {
         this.coordinates = coordinates;
     }
 
-    public String getComune() {
-        return comune;
+    public String getEnte() {
+        return ente;
     }
 
-    public void setComune(String comune) {
-        this.comune = comune;
+    public void setEnte(String ente) {
+        this.ente = ente;
     }
 }
