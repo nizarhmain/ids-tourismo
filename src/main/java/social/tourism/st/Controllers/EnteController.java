@@ -58,6 +58,7 @@ public class EnteController {
             model.setRegione(ente.getRegione());
             model.setSuperficie(ente.getSuperficie());
             model.setPassword(ente.getPassword());
+            model.setImage(ente.getImage());
 
             // creates an account for that ente
             Account account = new Account(ente.getNome(),
@@ -86,6 +87,7 @@ public class EnteController {
             model.setProvincia(ente.getProvincia());
             model.setRegione(ente.getRegione());
             model.setNome(ente.getNome());
+            model.setImage(ente.getImage());
             return repository.save(model);
         }
         return null;

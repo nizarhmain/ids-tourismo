@@ -28,6 +28,8 @@ public class Ente {
     @Size(min = 1, max = 30, message = "error.title.size")
     public String superficie;
 
+    public String image;
+
     @JsonIgnore
     @JsonProperty(value = "password")
     public String getPassword() { return this.password ;}
@@ -66,12 +68,22 @@ public class Ente {
         this.superficie = superficie;
     }
 
-    public Ente(String nome, String regione, String provincia, String superficie, String password) {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Ente(String nome, String regione, String provincia, String superficie, String password, String image) {
         this.nome = nome;
         this.regione = regione;
         this.provincia = provincia;
         this.superficie = superficie;
         this.password = password;
+        this.image = image;
+
     }
 
     public Ente(){};

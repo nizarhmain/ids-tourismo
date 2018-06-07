@@ -15,7 +15,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
@@ -29,7 +31,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// basic auth headers have to be sent each time
 		// to logout a user, we basically empty out their basic auth www-auth fi
 		// everything is secured with basic auth, nothing to fancy for the sake of focusing on the design mainly
-		http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+		http.cors().configurationSource(corsConfigurationSource());
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests().
 				// Auth CRUD
@@ -56,6 +58,16 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.httpBasic().and()
 				.csrf().disable();
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.applyPermitDefaultValues();
+		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "DELETE", "PUT"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
 	}
 
 

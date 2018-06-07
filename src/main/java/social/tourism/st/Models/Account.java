@@ -44,8 +44,6 @@ public class Account {
         this.password = password;
     }
 
-    @JsonIgnore
-    @JsonProperty(value = "role")
     public String getRole() {
         return role;
     }
